@@ -12,6 +12,7 @@ public class Frog extends Actor
     public boolean isDownPress;
     public boolean isRightPress;
     public boolean isLeftPress;
+    private int lives;
     
     public Frog()
     {
@@ -19,6 +20,7 @@ public class Frog extends Actor
         isDownPress = false;
         isRightPress = false;
         isLeftPress = false;
+        lives = 3;
     }
     
     /**
@@ -29,6 +31,7 @@ public class Frog extends Actor
     {
         keyJump();
         checkCollision();
+        getWorld().showText("LIVES: " + lives, 50, 30);
     }    
     
     public void keyJump()
@@ -63,6 +66,7 @@ public class Frog extends Actor
         if(isRightPress == false && Greenfoot.isKeyDown("right") && getX() < 740)
         {
             setLocation(getX() + 60, getY());
+            setImage("frog.png");
             isRightPress = true;
         }
         
@@ -72,11 +76,11 @@ public class Frog extends Actor
         }
         
         
-        
         //Check for the left key
         if(isLeftPress == false && Greenfoot.isKeyDown("left") && getX() > 60)
         {
             setLocation(getX() - 60, getY());
+            setImage("frog_left.png");
             isLeftPress = true;
         }
         
@@ -94,6 +98,8 @@ public class Frog extends Actor
         if(isTouching(Car.class) || isTouching(Truck.class))
         {
             setLocation(370, 510);
+            
+            lives = lives -1;
         }
     }
 }
