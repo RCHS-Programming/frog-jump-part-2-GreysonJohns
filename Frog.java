@@ -41,6 +41,10 @@ public class Frog extends Actor
         {
             setLocation( getX() , getY() - 60);
             isUpPress = true;
+            if(getY() < 60)
+            {
+                Greenfoot.setWorld(new WinScreen());
+            }
         }
         
         if( isUpPress && !Greenfoot.isKeyDown("up"))
@@ -97,9 +101,12 @@ public class Frog extends Actor
     {
         if(isTouching(Car.class) || isTouching(Truck.class))
         {
-            setLocation(370, 510);
-            
             lives = lives -1;
+            if(lives == 0)
+            {
+                Greenfoot.setWorld(new LoseScreen());
+            }
+            setLocation(370, 510);
         }
     }
 }
